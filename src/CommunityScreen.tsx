@@ -390,7 +390,7 @@ function PostCard({ post }: { post: Post }) {
         </Box>
 
         {/* 제목 */}
-        <Text textStyle="t6Bold" maxLines={1} style={{ color: fg }}>
+        <Text textStyle="t5Bold" maxLines={1} style={{ color: fg }}>
           {post.title}
         </Text>
 
@@ -406,7 +406,7 @@ function PostCard({ post }: { post: Post }) {
 
         {/* 본문 미리보기 */}
         {post.body && (
-          <Text textStyle="t4Regular" maxLines={1} style={{ color: fgSubtle }}>
+          <Text textStyle="t5Regular" maxLines={1} style={{ color: fgSubtle }}>
             {post.body}
           </Text>
         )}
