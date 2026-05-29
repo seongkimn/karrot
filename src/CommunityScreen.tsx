@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Chip,
+  FloatingActionButton,
   Icon,
   NotificationBadge,
   Text,
@@ -50,7 +51,7 @@ type Post = {
   schedule?: string;
   place?: { name: string; desc: string };
   meta: string;
-  thumb?: { emoji: string; bg: string };
+  thumb?: boolean;
   stats: { type: "members" | "reactions"; values: string[] };
 };
 
@@ -74,7 +75,7 @@ const posts: Post[] = [
     category: "분실/실종",
     title: "신한카드 발견*천호공원",
     place: { name: "천호공원 관리사무소", desc: "공원에서 오전에 …" },
-    thumb: { emoji: "💳", bg: "#8ec5e8" },
+    thumb: true,
     meta: "천호동 · 8시간 전 · 조회 121",
     stats: { type: "reactions", values: ["2"] },
   },
@@ -83,8 +84,8 @@ const posts: Post[] = [
     group: { name: "[어썸골프] 강동하…" },
     title: "심심하면 오세요",
     schedule: "5월 29일 금요일, 오후 7:30",
-    thumb: { emoji: "⛳", bg: "#2f6b4f" },
-    meta: "",
+    thumb: true,
+    meta: "강일동 · 9시간 전 · 조회 64",
     stats: { type: "reactions", values: [] },
   },
 ];
@@ -128,7 +129,6 @@ export default function CommunityScreen() {
         boxShadow: "0 0 0 1px var(--seed-color-stroke-neutral-subtle)",
       }}
     >
-      <StatusBar />
       <Header />
       <SectionTabs active={activeTab} onChange={setActiveTab} />
       <Filters />
@@ -149,31 +149,6 @@ export default function CommunityScreen() {
 
       <Fab />
       <BottomNav />
-    </Box>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 상단 상태바                                                          */
-/* ------------------------------------------------------------------ */
-
-function StatusBar() {
-  return (
-    <Box
-      style={{
-        height: 44,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 24px",
-      }}
-    >
-      <Text textStyle="t5Bold" style={{ color: fg }}>
-        4:33
-      </Text>
-      <Text textStyle="t3Regular" style={{ color: fg, letterSpacing: 1 }}>
-        🔕 📶 60
-      </Text>
     </Box>
   );
 }
@@ -229,7 +204,7 @@ function Header() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "8px 20px 12px",
+        padding: "16px 20px 12px",
       }}
     >
       <Text as="h1" textStyle="t8Bold" style={{ color: fg }}>
@@ -475,15 +450,9 @@ function PostCard({ post }: { post: Post }) {
               width: 96,
               height: 96,
               borderRadius: 8,
-              background: post.thumb.bg,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
+              background: "var(--seed-color-bg-layer-fill)",
             }}
-          >
-            {post.thumb.emoji}
-          </Box>
+          />
         )}
       </Box>
     </Box>
@@ -532,29 +501,18 @@ function Stats({ stats }: { stats: Post["stats"] }) {
 function Fab() {
   return (
     <Box
-      as="button"
       style={{
         position: "absolute",
         right: 16,
         bottom: 84,
-        display: "flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "12px 18px 12px 14px",
-        borderRadius: 999,
-        border: "none",
-        cursor: "pointer",
-        background: "var(--seed-color-bg-brand-solid)",
-        color: "var(--seed-color-palette-static-white)",
         boxShadow: "0 4px 12px rgba(0,0,0,0.18)",
+        borderRadius: 999,
       }}
     >
-      <Box style={{ width: 22, height: 22 }}>
-        <Icon svg={<PlusIcon />} />
-      </Box>
-      <Text textStyle="t5Bold" style={{ color: "var(--seed-color-palette-static-white)" }}>
-        글쓰기
-      </Text>
+      <FloatingActionButton.Root>
+        <FloatingActionButton.Icon svg={<PlusIcon />} />
+        <FloatingActionButton.Label>글쓰기</FloatingActionButton.Label>
+      </FloatingActionButton.Root>
     </Box>
   );
 }
