@@ -1744,7 +1744,7 @@ function JoinNoticeDialog({ onClose }: { onClose: () => void }) {
             lineHeight: 1.5,
           }}
         >
-          Maze 종료하기를 눌러 주세요!
+          하단 [작업 종료하기] 버튼을 눌러주세요!
         </Text>
         <Box
           as="button"
