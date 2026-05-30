@@ -3,18 +3,30 @@ import CommunityScreen from "./CommunityScreen";
 import CreateMeetup, { type MeetupDraft } from "./CreateMeetup";
 import MeetupDetail from "./MeetupDetail";
 import CommunityScreenB from "./variant-b/CommunityScreenB";
+import CommunityScreenC from "./variant-c/CommunityScreenC";
+import CommunityScreenD from "./variant-d/CommunityScreenD";
 
 type View = "community" | "create" | "detail";
 
 export default function App() {
   const [view, setView] = useState<View>("community");
   const [created, setCreated] = useState<MeetupDraft | null>(null);
-  const isVariantB =
-    window.location.pathname === "/b" ||
-    new URLSearchParams(window.location.search).get("variant") === "b";
+  const variant = new URLSearchParams(window.location.search).get("variant");
+  const path = window.location.pathname;
+  const isVariantB = path === "/b" || variant === "b";
+  const isVariantC = path === "/c" || variant === "c";
+  const isVariantD = path === "/d" || variant === "d";
 
   if (isVariantB) {
     return <CommunityScreenB />;
+  }
+
+  if (isVariantC) {
+    return <CommunityScreenC />;
+  }
+
+  if (isVariantD) {
+    return <CommunityScreenD />;
   }
 
   if (view === "create") {
