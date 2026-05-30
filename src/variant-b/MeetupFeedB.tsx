@@ -1,6 +1,6 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Box, Text } from "@seed-design/react";
-import { ChevronDownIcon, ChevronUpIcon, PersonIcon, PinIcon, PlusIcon } from "./icons";
+import { ChevronDownIcon, ChevronUpIcon, PersonIcon, PinIcon, PlusIcon } from "../icons";
 import {
   FixedIcon,
   PhotoTile,
@@ -12,13 +12,13 @@ import {
   hScrollOnWheel,
   layer,
   stroke,
-} from "./shared";
+} from "../shared";
 import {
   LastWeekRankingPage,
   RankingInfoSheet,
   WeeklyRanking,
-} from "./MeetupRanking";
-import MeetupAbout from "./MeetupAbout";
+} from "./MeetupRankingB";
+import MeetupAbout from "./MeetupAboutB";
 
 /* 모임 탭 피드 */
 

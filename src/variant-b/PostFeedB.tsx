@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Box, Icon, Switch, Text } from "@seed-design/react";
 import {
   BackIcon,
@@ -11,8 +11,8 @@ import {
   MoreIcon,
   ShareIcon,
   ThumbsUpIcon,
-} from "./icons";
-import { FixedIcon, brand, fg, fgInformative, fgMuted, fill, layer, stroke } from "./shared";
+} from "../icons";
+import { FixedIcon, brand, fg, fgInformative, fgMuted, fill, layer, stroke } from "../shared";
 
 /* 게시글 전체 보기 — 모임 소개 페이지에서 "게시글"을 누르면 열립니다. */
 

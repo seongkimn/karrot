@@ -1,4 +1,4 @@
-import { Box, Icon, Text } from "@seed-design/react";
+﻿import { Box, Icon, Text } from "@seed-design/react";
 import {
   BackIcon,
   ChatIcon,
@@ -6,8 +6,8 @@ import {
   MoreIcon,
   ShareIcon,
   ThumbsUpIcon,
-} from "./icons";
-import { FixedIcon, fg, fgInformative, fgMuted, fill, layer, stroke } from "./shared";
+} from "../icons";
+import { FixedIcon, fg, fgInformative, fgMuted, fill, layer, stroke } from "../shared";
 
 /* 일정 후기 전체 보기 — 모임 소개 페이지에서 "일정 후기"를 누르면 열립니다. */
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Box, Icon, Text } from "@seed-design/react";
 import {
   BackIcon,
@@ -19,7 +19,7 @@ import {
   ShareIcon,
   ShieldCheckIcon,
   ThumbsUpIcon,
-} from "./icons";
+} from "../icons";
 import {
   FixedIcon,
   brand,
@@ -30,13 +30,13 @@ import {
   fill,
   layer,
   stroke,
-} from "./shared";
-import ScheduleReviewFeed from "./ScheduleReviewFeed";
-import ScheduleFeed from "./ScheduleFeed";
-import ChallengeFeed from "./ChallengeFeed";
-import PostFeed from "./PostFeed";
-import type { ReviewPost } from "./ScheduleReviewFeed";
-import type { SchedulePreviewReview } from "./ScheduleFeed";
+} from "../shared";
+import ScheduleReviewFeed from "./ScheduleReviewFeedB";
+import ScheduleFeed from "./ScheduleFeedB";
+import ChallengeFeed from "./ChallengeFeedB";
+import PostFeed from "./PostFeedB";
+import type { ReviewPost } from "./ScheduleReviewFeedB";
+import type { SchedulePreviewReview } from "./ScheduleFeedB";
 
 /* 모임 가입 전 공개 소개(랜딩) 페이지 — 피드 카드를 누르면 열립니다. */
 
@@ -215,105 +215,8 @@ type MeetupContent = {
   stats: typeof STATS;
 };
 
-type MoodSummary = {
-  accent: string;
-  suffix: string;
-  desc: string;
-  tags: string[];
-};
-
 function titleIncludes(meetup: MeetupAboutTarget, keyword: string) {
   return meetup.title.includes(keyword);
-}
-
-function getMoodSummary(meetup: MeetupAboutTarget, categoryLabel: string): MoodSummary {
-  if (titleIncludes(meetup, "스터디")) {
-    return {
-      accent: "2030 조용한 스터디러들이",
-      suffix: "길동에서 모여요",
-      desc: "집중할 땐 각자 몰입하고, 쉬는 시간엔 고양이 이야기로 가볍게 풀어지는 분위기에요.",
-      tags: ["스터디 집중", "따뜻한", "꾸준한", "초보 환영"],
-    };
-  }
-
-  if (titleIncludes(meetup, "러닝")) {
-    return {
-      accent: "2030 가벼운 러너들이",
-      suffix: "천호동에서 모여요",
-      desc: "기록 경쟁보다 같이 나오는 습관을 더 중요하게 생각해요. 처음 뛰는 멤버도 천천히 맞춰가요.",
-      tags: ["천천히 러닝", "응원 많은", "아침형", "초보 환영"],
-    };
-  }
-
-  if (titleIncludes(meetup, "등산")) {
-    return {
-      accent: "3040 산책형 등산러들이",
-      suffix: "길동 근처에서 모여요",
-      desc: "무리하지 않는 코스를 좋아하고, 하산 후 식사까지 편하게 이어지는 차분한 모임이에요.",
-      tags: ["안전 산행", "느긋한", "식사까지", "소규모"],
-    };
-  }
-
-  if (titleIncludes(meetup, "산책")) {
-    return {
-      accent: "동네 산책러들이",
-      suffix: "공원에서 편하게 만나요",
-      desc: "말이 많아도 조용해도 괜찮은 분위기에요. 걷다가 가까운 카페에서 쉬어가는 걸 좋아해요.",
-      tags: ["가벼운 산책", "편안한", "카페 수다", "부담 없음"],
-    };
-  }
-
-  if (titleIncludes(meetup, "보드게임")) {
-    return {
-      accent: "입문 보드게이머들이",
-      suffix: "천호동에서 모여요",
-      desc: "룰 설명을 천천히 해주는 편이고, 승패보다 같이 웃고 떠드는 시간을 더 좋아해요.",
-      tags: ["룰 설명 친절", "웃긴 분위기", "입문 환영", "간식"],
-    };
-  }
-
-  if (titleIncludes(meetup, "밥") || titleIncludes(meetup, "맛집")) {
-    return {
-      accent: "퇴근 후 밥친구들이",
-      suffix: "강동구 맛집을 찾아요",
-      desc: "메뉴 고르는 대화가 활발하고, 처음 와도 식사하면서 자연스럽게 친해지는 분위기에요.",
-      tags: ["밥친구", "메뉴 추천", "편한 대화", "퇴근 후"],
-    };
-  }
-
-  if (titleIncludes(meetup, "캘리그라피")) {
-    return {
-      accent: "손글씨 취미러들이",
-      suffix: "미사동에서 모여요",
-      desc: "잘 쓰는 것보다 천천히 따라가며 완성하는 재미를 좋아해요. 서로 작품을 칭찬하는 말이 많아요.",
-      tags: ["차분한 취미", "칭찬 많은", "작품 공유", "초보 환영"],
-    };
-  }
-
-  if (titleIncludes(meetup, "강아지")) {
-    return {
-      accent: "반려견 산책 메이트들이",
-      suffix: "천호동에서 만나요",
-      desc: "강아지 성향을 배려하면서 천천히 친해지는 모임이에요. 산책 코스와 간식 정보가 자주 오가요.",
-      tags: ["강아지 산책", "배려 깊은", "정보 공유", "동네 친구"],
-    };
-  }
-
-  if (titleIncludes(meetup, "독서")) {
-    return {
-      accent: "동네 독서러들이",
-      suffix: "천호동에서 모여요",
-      desc: "무거운 토론보다 읽은 문장을 편하게 나누는 분위기에요. 책 추천과 기록 이야기가 자주 나와요.",
-      tags: ["책 추천", "차분한", "기록 공유", "느슨한"],
-    };
-  }
-
-  return {
-    accent: `${categoryLabel} 취향 멤버들이`,
-    suffix: `${meetup.place ?? "동네"}에서 모여요`,
-    desc: "처음 온 멤버도 어색하지 않게 이야기를 나누고, 관심사가 맞으면 다음 일정까지 자연스럽게 이어져요.",
-    tags: ["편안한", "취향 공유", "초보 환영", "꾸준한"],
-  };
 }
 
 function getMeetupContent(meetup: MeetupAboutTarget): MeetupContent {
@@ -734,7 +637,6 @@ export default function MeetupAbout({
   const content = getMeetupContent(meetup);
   const memberCount = meetup.count ?? "115명";
   const region = meetup.place ?? "천호제3동";
-  const moodSummary = getMoodSummary(meetup, content.categoryLabel);
   const ongoingChallenges = content.challenges.filter(
     (challenge) => challenge.ongoing && !challenge.status.startsWith("D-"),
   );
@@ -1279,93 +1181,6 @@ export default function MeetupAbout({
           <Text textStyle="t6Bold" style={{ color: fg }}>
             멤버 {memberCount}
           </Text>
-        </Box>
-        <Box style={{ padding: "0 20px 20px" }}>
-          <Box
-            style={{
-              background: "#fff0e2",
-              borderRadius: 22,
-              padding: "24px 22px 22px",
-            }}
-          >
-            <Box style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <Box style={{ display: "flex", alignItems: "center" }}>
-                {[fill, "#f9e4f0", "#e8eefb", "#fbf1dc", "#ececff"].map((color, i) => (
-                  <Box
-                    key={color}
-                    style={{
-                      width: 34,
-                      height: 34,
-                      borderRadius: "50%",
-                      background: color,
-                      border: "2px solid #fff",
-                      marginLeft: i === 0 ? 0 : -8,
-                    }}
-                  />
-                ))}
-              </Box>
-              <Text textStyle="t4Bold" style={{ color: fg }}>
-                멤버 {memberCount}
-              </Text>
-            </Box>
-            <Text
-              textStyle="t7Bold"
-              style={{
-                color: fg,
-                display: "block",
-                marginTop: 18,
-                lineHeight: 1.28,
-              }}
-            >
-              주로{" "}
-              <Text as="span" textStyle="t7Bold" style={{ color: brand }}>
-                {moodSummary.accent}
-              </Text>
-              <br />
-              {moodSummary.suffix}
-            </Text>
-            <Text
-              textStyle="t4Bold"
-              style={{ color: fgMuted, display: "block", marginTop: 14, lineHeight: 1.5 }}
-            >
-              {moodSummary.desc}
-            </Text>
-          </Box>
-
-          <Box style={{ marginTop: 18 }}>
-            <Text textStyle="t5Bold" style={{ color: fg, display: "block" }}>
-              멤버들은 이런 분위기에요
-            </Text>
-            <Text textStyle="t3Bold" style={{ color: fgMuted, display: "block", marginTop: 4 }}>
-              자기소개, 후기에서 자주 나온 말이에요
-            </Text>
-            <Box style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
-              {moodSummary.tags.map((tag, i) => {
-                const highlighted = i === 0;
-                return (
-                  <Box
-                    key={tag}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 5,
-                      padding: "8px 13px",
-                      borderRadius: 999,
-                      background: highlighted ? "#fff0e2" : fill,
-                    }}
-                  >
-                    {highlighted && <FixedIcon svg={<LeafIcon />} size={15} color={brand} />}
-                    <Text
-                      textStyle="t3Bold"
-                      style={{ color: highlighted ? brand : fgMuted }}
-                    >
-                      {tag}
-                    </Text>
-                  </Box>
-                );
-              })}
-            </Box>
-          </Box>
         </Box>
         {content.members.map((m, i) => (
           <Box

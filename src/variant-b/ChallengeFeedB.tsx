@@ -1,6 +1,6 @@
-import { Box, Icon, Text } from "@seed-design/react";
-import { BackIcon, PeopleIcon, PlusIcon, QuestionCircleIcon } from "./icons";
-import { FixedIcon, brand, fg, fgMuted, fill, layer, stroke } from "./shared";
+﻿import { Box, Icon, Text } from "@seed-design/react";
+import { BackIcon, PeopleIcon, PlusIcon, QuestionCircleIcon } from "../icons";
+import { FixedIcon, brand, fg, fgMuted, fill, layer, stroke } from "../shared";
 
 /* 모임 챌린지 전체 보기 — 모임 소개 페이지에서 "챌린지"를 누르면 열립니다. */
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { ActionButton, Box, Icon, Text } from "@seed-design/react";
 import {
   BackIcon,
@@ -6,7 +6,7 @@ import {
   PinIcon,
   QuestionCircleIcon,
   RefreshIcon,
-} from "./icons";
+} from "../icons";
 import {
   FixedIcon,
   PhotoTile,
@@ -17,7 +17,7 @@ import {
   fill,
   layer,
   stroke,
-} from "./shared";
+} from "../shared";
 
 /* ================================================================== */
 /* 랭킹 데이터                                                          */

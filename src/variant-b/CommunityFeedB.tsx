@@ -1,4 +1,4 @@
-import { Badge, Box, Chip, Icon, Text } from "@seed-design/react";
+﻿import { Badge, Box, Chip, Icon, Text } from "@seed-design/react";
 import {
   CalendarIcon,
   ChatIcon,
@@ -9,8 +9,8 @@ import {
   PinIcon,
   ThumbsUpIcon,
   VoteIcon,
-} from "./icons";
-import { FixedIcon, fg, fgMuted, fgSubtle, fill, hScrollOnWheel, stroke } from "./shared";
+} from "../icons";
+import { FixedIcon, fg, fgMuted, fgSubtle, fill, hScrollOnWheel, stroke } from "../shared";
 
 /* 동네생활(추천) 피드 */
 

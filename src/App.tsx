@@ -2,12 +2,20 @@ import { useState } from "react";
 import CommunityScreen from "./CommunityScreen";
 import CreateMeetup, { type MeetupDraft } from "./CreateMeetup";
 import MeetupDetail from "./MeetupDetail";
+import CommunityScreenB from "./variant-b/CommunityScreenB";
 
 type View = "community" | "create" | "detail";
 
 export default function App() {
   const [view, setView] = useState<View>("community");
   const [created, setCreated] = useState<MeetupDraft | null>(null);
+  const isVariantB =
+    window.location.pathname === "/b" ||
+    new URLSearchParams(window.location.search).get("variant") === "b";
+
+  if (isVariantB) {
+    return <CommunityScreenB />;
+  }
 
   if (view === "create") {
     return (

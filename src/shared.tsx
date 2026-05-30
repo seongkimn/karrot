@@ -180,16 +180,19 @@ export function SectionTabs({
     >
       {sectionTabs.map((tab) => {
         const isActive = tab === active;
+        const isDisabled = tab === sectionTabs[0] || tab === sectionTabs[2];
         const isApart = tab === "아파트";
         return (
           <Box
             as="button"
             key={tab}
-            onClick={() => onChange(tab)}
+            aria-disabled={isDisabled}
+            tabIndex={isDisabled ? -1 : 0}
+            onClick={isDisabled ? undefined : () => onChange(tab)}
             style={{
               border: "none",
               background: "transparent",
-              cursor: "pointer",
+              cursor: isDisabled ? "default" : "pointer",
               padding: 0,
               display: "flex",
               alignItems: "center",

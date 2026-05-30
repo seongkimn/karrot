@@ -1,6 +1,6 @@
-import { Box, Icon, Text } from "@seed-design/react";
-import { BackIcon, ClockIcon, LockIcon, PeopleIcon, ThumbsUpIcon } from "./icons";
-import { FixedIcon, fg, fgMuted, fill, layer, stroke } from "./shared";
+﻿import { Box, Icon, Text } from "@seed-design/react";
+import { BackIcon, ClockIcon, LockIcon, PeopleIcon, ThumbsUpIcon } from "../icons";
+import { FixedIcon, fg, fgMuted, fill, layer, stroke } from "../shared";
 
 /* 일정 전체 보기 — 모임 소개 페이지에서 "일정"을 누르면 열립니다. */
 
