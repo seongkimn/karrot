@@ -266,7 +266,7 @@ function getEnglishStudyContent(meetup: MeetupAboutTarget, base: MeetupContent):
     hostStats: quiet
       ? [
           { label: "모임 방문", value: "184" },
-          { label: "최근 방문", value: "2일 전" },
+          { label: "최근 방문", value: "3개월 전" },
           { label: "일정 참여", value: "6" },
         ]
       : very
@@ -310,8 +310,8 @@ function getEnglishStudyContent(meetup: MeetupAboutTarget, base: MeetupContent):
           ],
     schedules: quiet
       ? [
-          { month: "6월", day: "8", title: `${title} 첫 모임`, time: "오후 7:30", people: "2/5명" },
-          { month: "6월", day: "22", title: "모임에만 공개된 일정이에요.", locked: true, time: "오후 7:30", people: "1/5명" },
+          { month: "2월", day: "11", title: `${title} 첫 모임`, time: "오후 7:30", people: "2/5명" },
+          { month: "1월", day: "18", title: "모임에만 공개된 일정이에요.", locked: true, time: "오후 7:30", people: "1/5명" },
         ]
       : very
         ? [
@@ -326,9 +326,9 @@ function getEnglishStudyContent(meetup: MeetupAboutTarget, base: MeetupContent):
           ],
     challenges: quiet
       ? [
-          { title: "영어 문장 10개 필사 챌린지", status: "진행 3일차", ongoing: true, period: "2주 동안 · 주 3일", people: "5명 참여" },
-          { title: "원서 한 챕터 읽기", status: "D-5", ongoing: true, period: "2주 동안 · 자유", people: "4명 참여" },
-          { title: "5월 영어 다시 시작 챌린지", status: "종료", period: "1개월 동안 · 주 2일", people: "6명 참여" },
+          { title: "2월 영어 문장 10개 필사 챌린지", status: "종료", period: "2주 동안 · 주 3일", people: "5명 참여" },
+          { title: "1월 원서 한 챕터 읽기", status: "종료", period: "2주 동안 · 자유", people: "4명 참여" },
+          { title: "12월 영어 다시 시작 챌린지", status: "종료", period: "1개월 동안 · 주 2일", people: "6명 참여" },
         ]
       : very
         ? [
@@ -344,8 +344,8 @@ function getEnglishStudyContent(meetup: MeetupAboutTarget, base: MeetupContent):
     postTabs: ["전체", "가입인사", "영어 인증", "표현 공유", "일정 후기"],
     posts: quiet
       ? [
-          { author: "유진", verified: true, time: "2일 전", board: "영어 인증", lines: ["오늘 읽은 문장 5개만 조용히 남겨요.", "다음 모임 전까지 한 챕터 더 읽어보겠습니다."], likes: 2, comments: 0, views: 9 },
-          { author: "서윤", time: "5일 전", board: "표현 공유", lines: ["이번 주 표현 정리 파일 올려둘게요.", "필요한 분들은 편하게 참고해주세요."], likes: 3, comments: 1, views: 14 },
+          { author: "유진", verified: true, time: "3개월 전", board: "영어 인증", lines: ["오늘 읽은 문장 5개만 조용히 남겨요.", "다음 모임 전까지 한 챕터 더 읽어보겠습니다."], likes: 2, comments: 0, views: 9 },
+          { author: "서윤", time: "4개월 전", board: "표현 공유", lines: ["이번 주 표현 정리 파일 올려둘게요.", "필요한 분들은 편하게 참고해주세요."], likes: 3, comments: 1, views: 14 },
         ]
       : very
         ? [
@@ -360,7 +360,7 @@ function getEnglishStudyContent(meetup: MeetupAboutTarget, base: MeetupContent):
           ],
     scheduleReviews: quiet
       ? [
-          { author: "태오", badge: "verified", time: "1주 전 · 일정 후기", text: ["사람이 많지 않아서 차분하게 읽고 이야기하기 좋았어요."], photos: 0, likes: 3, views: 11 },
+          { author: "태오", badge: "verified", time: "3개월 전 · 일정 후기", text: ["사람이 많지 않아서 차분하게 읽고 이야기하기 좋았어요."], photos: 0, likes: 3, views: 11 },
         ]
       : very
         ? [
@@ -826,6 +826,16 @@ export default function MeetupAbout({
   const region = meetup.place ?? "천호제3동";
   const activity = meetup.activity;
   const activityDisplay = activity ? activityTone[activity.level] : null;
+  // 멤버 새 메시지 미리보기 — 활동성에 따라 건수/시점이 달라집니다.
+  const msgPreview =
+    activity?.level === "quiet"
+      ? { count: 2, time: "3개월 전" }
+      : activity?.level === "very"
+        ? { count: 128, time: "방금 전" }
+        : { count: 36, time: "1일 전" };
+  // 최근 30일 가입자 수도 활동성에 맞춰 다르게 보여줍니다.
+  const joinedLast30d =
+    activity?.level === "quiet" ? "0명" : activity?.level === "very" ? "21명" : "8명";
   const ongoingChallenges = content.challenges.filter(
     (challenge) => challenge.ongoing && !challenge.status.startsWith("D-"),
   );
@@ -1087,11 +1097,11 @@ export default function MeetupAbout({
                 멤버 {memberCount}의 새 메시지
               </Text>
               <Text textStyle="t4Bold" style={{ color: fg }}>
-                +36
+                +{msgPreview.count}
               </Text>
             </Box>
             <Text textStyle="t3Regular" style={{ color: fgMuted, flexShrink: 0 }}>
-              1일 전
+              {msgPreview.time}
             </Text>
             <FixedIcon svg={<ChevronRightIcon />} size={18} color={fgMuted} />
           </Box>
@@ -1581,7 +1591,7 @@ export default function MeetupAbout({
           <Text textStyle="t4Regular" style={{ color: fgSubtle }}>
             최근 30일간{" "}
             <Text as="span" textStyle="t4Bold" style={{ color: fg }}>
-              8명
+              {joinedLast30d}
             </Text>
             이 가입했어요
           </Text>
@@ -1774,6 +1784,13 @@ function HostProfilePage({
   onJoin: () => void;
 }) {
   const primaryPost = content.posts[0];
+  // 모임장 마지막 게시 시점도 활동성에 맞춥니다 — 잠잠한 모임은 몇 달 전.
+  const hostLastPost =
+    meetup.activity?.level === "quiet"
+      ? "3개월 전"
+      : meetup.activity?.level === "very"
+        ? "1시간 전"
+        : "4일 전";
 
   return (
     <Box
@@ -1941,7 +1958,7 @@ function HostProfilePage({
                 {content.hostName} 👑
               </Text>
               <Text textStyle="t3Regular" style={{ color: fgMuted, display: "block", marginTop: 3 }}>
-                4일 전 · 모임일정
+                {hostLastPost} · 모임일정
               </Text>
             </Box>
             <FixedIcon svg={<MoreIcon />} size={20} color={fgMuted} />

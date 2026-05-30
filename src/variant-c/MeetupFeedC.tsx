@@ -75,8 +75,8 @@ const meetups: Meetup[] = [
     category: "자기계발",
     place: "길동",
     count: "18명",
-    status: "2일 전 활동",
-    activity: { level: "quiet", posts7d: 1, meetups7d: 0 },
+    status: "3개월 전 활동",
+    activity: { level: "quiet", posts7d: 0, meetups7d: 0 },
   },
   {
     title: "천호 영어 원서 한 챕터 읽기",
@@ -86,8 +86,8 @@ const meetups: Meetup[] = [
     category: "자기계발",
     place: "천호동",
     count: "23명",
-    status: "1일 전 활동",
-    activity: { level: "quiet", posts7d: 2, meetups7d: 1 },
+    status: "4개월 전 활동",
+    activity: { level: "quiet", posts7d: 0, meetups7d: 0 },
   },
   {
     title: "아침 30분 영어회화 루틴",
