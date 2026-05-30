@@ -56,6 +56,15 @@ export type MeetupAboutTarget = {
   };
 };
 
+const activityTone = {
+  quiet: { label: "잠잠해요", color: fgMuted },
+  active: { label: "활발해요", color: "#1d8f54" },
+  very: { label: "아주 활발해요", color: "#e5482f" },
+} satisfies Record<
+  NonNullable<MeetupAboutTarget["activity"]>["level"],
+  { label: string; color: string }
+>;
+
 /* 소개 본문(이모지 + 단락). 스크린샷의 뜨개질 모임 소개를 그대로 옮깁니다. */
 const DESCRIPTION: { emoji: string; lines: string[] }[] = [
   { emoji: "🧶", lines: ["대바늘, 코바늘 모두 환영하는 뜨개 모임입니다."] },
@@ -815,6 +824,8 @@ export default function MeetupAbout({
   const content = getMeetupContent(meetup);
   const memberCount = meetup.count ?? "115명";
   const region = meetup.place ?? "천호제3동";
+  const activity = meetup.activity;
+  const activityDisplay = activity ? activityTone[activity.level] : null;
   const ongoingChallenges = content.challenges.filter(
     (challenge) => challenge.ongoing && !challenge.status.startsWith("D-"),
   );
@@ -993,6 +1004,29 @@ export default function MeetupAbout({
             </Box>
           </Box>
           <Box style={{ flex: 1, minWidth: 0 }}>
+            {activity && activityDisplay && (
+              <Box style={{ display: "flex", alignItems: "center", gap: 5, minWidth: 0, marginBottom: 3 }}>
+                <Box
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: activityDisplay.color,
+                    flexShrink: 0,
+                  }}
+                />
+                <Text
+                  textStyle="t3Bold"
+                  maxLines={1}
+                  style={{ color: activityDisplay.color, flexShrink: 0 }}
+                >
+                  {activityDisplay.label}
+                </Text>
+                <Text textStyle="t3Regular" maxLines={1} style={{ color: fgMuted }}>
+                  · 최근 7일 새 글 {activity.posts7d}개 · 모임 {activity.meetups7d}회
+                </Text>
+              </Box>
+            )}
             <Text textStyle="t6Bold" maxLines={1} style={{ color: fg, display: "block" }}>
               {meetup.title}
             </Text>

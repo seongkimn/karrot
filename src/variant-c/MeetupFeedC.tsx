@@ -135,12 +135,6 @@ const meetups: Meetup[] = [
   },
 ];
 
-const activityTone = {
-  quiet: { label: "잠잠해요", color: fgMuted },
-  active: { label: "활발해요", color: "#1d8f54" },
-  very: { label: "아주 활발해요", color: "#e5482f" },
-} satisfies Record<MeetupActivity["level"], { label: string; color: string }>;
-
 /* ------------------------------------------------------------------ */
 /* 추천 모임 가로 스크롤                                                 */
 /* ------------------------------------------------------------------ */
@@ -382,8 +376,6 @@ function SubFilters({
 /* ------------------------------------------------------------------ */
 
 function MeetupCard({ meetup, onClick }: { meetup: Meetup; onClick?: () => void }) {
-  const tone = activityTone[meetup.activity.level];
-
   return (
     <Box
       as="button"
@@ -411,23 +403,6 @@ function MeetupCard({ meetup, onClick }: { meetup: Meetup; onClick?: () => void 
           gap: 5,
         }}
       >
-        <Box style={{ display: "flex", alignItems: "center", gap: 5, minWidth: 0 }}>
-          <Box
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: 999,
-              background: tone.color,
-              flexShrink: 0,
-            }}
-          />
-          <Text textStyle="t3Bold" maxLines={1} style={{ color: tone.color, flexShrink: 0 }}>
-            {tone.label}
-          </Text>
-          <Text textStyle="t3Regular" maxLines={1} style={{ color: fgMuted }}>
-            · 최근 7일 새 글 {meetup.activity.posts7d}개 · 모임 {meetup.activity.meetups7d}회
-          </Text>
-        </Box>
         <Text textStyle="t5Bold" maxLines={1} style={{ color: fg }}>
           {meetup.title}
         </Text>
