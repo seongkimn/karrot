@@ -21,5 +21,15 @@ body {
   /* Seed Design 토큰을 사용해 배경/전경 색을 지정합니다. */
   background: var(--seed-color-bg-layer-basement);
   color: var(--seed-color-fg-neutral);
-  min-height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* 모바일 목업이라 스크롤바를 숨기고 스크롤만 동작시킵니다. */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }

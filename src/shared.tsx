@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Icon, NotificationBadge, Text } from "@seed-design/react";
 import {
   ArrowUpRightIcon,
@@ -19,15 +20,68 @@ export const fg = "var(--seed-color-fg-neutral)";
 export const fgSubtle = "var(--seed-color-fg-neutral-subtle)";
 export const fgMuted = "var(--seed-color-fg-neutral-muted)";
 export const fgInformative = "var(--seed-color-fg-informative)";
+export const fgCritical = "var(--seed-color-fg-critical)";
 export const layer = "var(--seed-color-bg-layer-default)";
 export const fill = "var(--seed-color-bg-layer-fill)";
 export const stroke = "var(--seed-color-stroke-neutral-subtle)";
+export const brand = "var(--seed-color-bg-brand-solid)";
 
 export const sectionTabs = ["동네생활", "모임", "카페", "아파트"];
 
 /* ------------------------------------------------------------------ */
 /* 작은 공용 컴포넌트                                                    */
 /* ------------------------------------------------------------------ */
+
+/**
+ * 가로 스크롤 영역에서 세로 휠 제스처를 가로 스크롤로 변환합니다.
+ * 스크롤바를 숨겨도 데스크톱 마우스로 가로 스크롤할 수 있게 해줍니다.
+ */
+export function hScrollOnWheel(e: React.WheelEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  if (e.deltaY === 0 || el.scrollWidth <= el.clientWidth) return;
+  el.scrollLeft += e.deltaY;
+}
+
+/**
+ * 사진 대신 쓰는 테마 타일. (오프라인에서도 항상 렌더되도록 외부 이미지 대신
+ * 그라데이션 + 이모지로 썸네일을 표현합니다.)
+ */
+export function PhotoTile({
+  emoji,
+  hue = 20,
+  size,
+  radius = 16,
+  fontScale = 0.5,
+  style,
+}: {
+  emoji: string;
+  hue?: number;
+  size: number;
+  radius?: number;
+  fontScale?: number;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <Box
+      style={{
+        width: size,
+        height: size,
+        borderRadius: radius,
+        flexShrink: 0,
+        overflow: "hidden",
+        background: `linear-gradient(135deg, hsl(${hue} 72% 80%), hsl(${(hue + 35) % 360} 60% 64%))`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: size * fontScale,
+        lineHeight: 1,
+        ...style,
+      }}
+    >
+      {emoji}
+    </Box>
+  );
+}
 
 /** 고정 크기 박스 안에서 currentColor로 그려지는 아이콘 */
 export function FixedIcon({
@@ -158,21 +212,20 @@ export function SectionTabs({
 
 const bottomNav = [
   { label: "홈", icon: <HomeIcon /> },
-  { label: "커뮤니티", icon: <CommunityIcon />, active: true },
+  { label: "커뮤니티", icon: <CommunityIcon /> },
   { label: "동네지도", icon: <MapIcon /> },
   { label: "채팅", icon: <ChatIcon />, badge: "5" },
   { label: "나의 당근", icon: <PersonIcon /> },
 ];
 
 export function BottomNav() {
+  const [active, setActive] = useState("커뮤니티");
+
   return (
     <Box
       as="nav"
       style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        bottom: 0,
+        flexShrink: 0,
         height: 76,
         display: "flex",
         background: layer,
@@ -181,11 +234,13 @@ export function BottomNav() {
       }}
     >
       {bottomNav.map((item) => {
-        const color = item.active ? fg : fgMuted;
+        const isActive = item.label === active;
+        const color = isActive ? fg : fgMuted;
         return (
           <Box
             as="button"
             key={item.label}
+            onClick={() => setActive(item.label)}
             style={{
               flex: 1,
               border: "none",
@@ -209,7 +264,7 @@ export function BottomNav() {
             </Box>
             <Text
               textStyle="t1Regular"
-              style={{ color, fontWeight: item.active ? 700 : 400 }}
+              style={{ color, fontWeight: isActive ? 700 : 400 }}
             >
               {item.label}
             </Text>

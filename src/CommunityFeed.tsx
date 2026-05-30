@@ -10,7 +10,7 @@ import {
   ThumbsUpIcon,
   VoteIcon,
 } from "./icons";
-import { FixedIcon, fg, fgMuted, fgSubtle, fill, stroke } from "./shared";
+import { FixedIcon, fg, fgMuted, fgSubtle, fill, hScrollOnWheel, stroke } from "./shared";
 
 /* 동네생활(추천) 피드 */
 
@@ -72,6 +72,8 @@ const posts: Post[] = [
 function Filters() {
   return (
     <Box
+      className="no-scrollbar"
+      onWheel={hScrollOnWheel}
       style={{
         display: "flex",
         gap: 8,
