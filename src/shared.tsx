@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState } from "react";
 import { Box, Icon, NotificationBadge, Text } from "@seed-design/react";
 import {
