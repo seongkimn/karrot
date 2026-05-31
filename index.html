@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>고양이와 함께하는 스터디 모임</title>
-    <!-- Maze 사용성 테스트 스니펫 -->
+    <title>커뮤니티 · 당근</title>
+    <!-- Maze 사용성 테스트 스니펫 (분기별로 다른 apiKey 사용) -->
     <script>
-      (function (m, a, z, e) {
+      (function (m, a, z) {
+        // 경로(/c) 또는 ?variant=c 이면 C 전용 키, 그 외에는 기본 키.
+        var path = m.location.pathname;
+        var variant = new URLSearchParams(m.location.search).get('variant');
+        var isC = path === '/c' || variant === 'c';
+        var e = isC
+          ? '7dd405da-f638-4a4e-8f54-765bc9788969'
+          : '8c099b31-5b36-4982-a212-d97063444677';
+
         var s, t, u, v;
         try {
           t = m.sessionStorage.getItem('maze-us');
@@ -32,7 +40,7 @@
         if (v) s.setAttribute('nonce', v);
         a.getElementsByTagName('head')[0].appendChild(s);
         m.mazeUniversalSnippetApiKey = e;
-      })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '8c099b31-5b36-4982-a212-d97063444677');
+      })(window, document, 'https://snippet.maze.co/maze-universal-loader.js');
     </script>
   </head>
   <body>

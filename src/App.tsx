@@ -1,16 +1,51 @@
-import MeetupAbout from "./MeetupAbout";
+import { useState } from "react";
+import CommunityScreen from "./CommunityScreen";
+import CreateMeetup, { type MeetupDraft } from "./CreateMeetup";
+import MeetupDetail from "./MeetupDetail";
+import CommunityScreenB from "./variant-b/CommunityScreenB";
+import CommunityScreenC from "./variant-c/CommunityScreenC";
+import CommunityScreenD from "./variant-d/CommunityScreenD";
 
-const catStudyMeetup = {
-  title: "고양이와 함께하는 스터디 모임",
-  desc: "| 고양이와 함께 아늑한 공간에서 스터디&힐링🧡 #…",
-  emoji: "🐱",
-  hue: 30,
-  category: "자기계발",
-  place: "길동",
-  count: "147명",
-  status: "일정 모집 중",
-};
+type View = "community" | "create" | "detail";
 
 export default function App() {
-  return <MeetupAbout meetup={catStudyMeetup} onBack={() => undefined} />;
+  const [view, setView] = useState<View>("community");
+  const [created, setCreated] = useState<MeetupDraft | null>(null);
+  const variant = new URLSearchParams(window.location.search).get("variant");
+  const path = window.location.pathname;
+  const isVariantB = path === "/b" || variant === "b";
+  const isVariantC = path === "/c" || variant === "c";
+  const isVariantD = path === "/d" || variant === "d";
+
+  if (isVariantB) {
+    return <CommunityScreenB />;
+  }
+
+  if (isVariantC) {
+    return <CommunityScreenC />;
+  }
+
+  if (isVariantD) {
+    return <CommunityScreenD />;
+  }
+
+  if (view === "create") {
+    return (
+      <CreateMeetup
+        onClose={() => setView("community")}
+        onComplete={(draft) => {
+          setCreated(draft);
+          setView("detail");
+        }}
+      />
+    );
+  }
+
+  if (view === "detail" && created) {
+    return <MeetupDetail draft={created} onBack={() => setView("community")} />;
+  }
+
+  // 모임 만들기 플로우는 코드로 보존하되(위 분기) 진입 경로를 끊어 비활성화합니다.
+  // "모임 만들기" 버튼은 보이지만 onCreateMeetup을 넘기지 않아 눌러도 동작하지 않습니다.
+  return <CommunityScreen />;
 }
